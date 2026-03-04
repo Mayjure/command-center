@@ -15,7 +15,7 @@
     <div class="logo">MB<span>CHART</span></div>
     <div class="symbol-selector">
       <span class="symbol-active" id="active-symbol">NQ1!</span>
-      <span class="symbol-exchange">NASDAQ · FUTURES</span>
+      <span class="symbol-exchange" id="active-exchange">NASDAQ · FUTURES</span>
     </div>
     <div class="price-display">
       <span class="cur-price" id="cur-price">18,432.50</span>
@@ -57,28 +57,48 @@
 
   <!-- LEFT TOOLBAR -->
   <div class="left-toolbar">
-    <button class="tool-btn active" title="Cursor" onclick="setTool(this)">✛</button>
-    <button class="tool-btn" title="Crosshair" onclick="setTool(this)">⊕</button>
+    <div class="toolbar-section-label">CURSOR</div>
+    <button class="tool-btn active" title="Default Cursor" onclick="setTool(this,'cursor')">✛</button>
+    <button class="tool-btn" title="Crosshair" onclick="setTool(this,'crosshair')">⊕</button>
+
     <div class="tool-sep"></div>
-    <button class="tool-btn" title="Trend Line" onclick="setTool(this)">╱</button>
-    <button class="tool-btn" title="Horizontal Ray" onclick="setTool(this)">—</button>
-    <button class="tool-btn" title="Fib Retracement" onclick="setTool(this)">φ</button>
-    <button class="tool-btn" title="Rectangle" onclick="setTool(this)">▭</button>
+    <div class="toolbar-section-label">DRAW</div>
+    <button class="tool-btn" title="Trend Line" onclick="setTool(this,'trendline')">╱</button>
+    <button class="tool-btn" title="Horizontal Line" onclick="setTool(this,'hline')">—</button>
+    <button class="tool-btn" title="Vertical Line" onclick="setTool(this,'vline')">|</button>
+    <button class="tool-btn" title="Ray" onclick="setTool(this,'ray')">→</button>
+    <button class="tool-btn" title="Fib Retracement" onclick="setTool(this,'fib')">φ</button>
+
     <div class="tool-sep"></div>
-    <button class="tool-btn" title="Text" onclick="setTool(this)">T</button>
-    <button class="tool-btn" title="Magnet" onclick="setTool(this)">⊛</button>
+    <div class="toolbar-section-label">SHAPES</div>
+    <button class="tool-btn" title="Rectangle" onclick="setTool(this,'rect')">▭</button>
+    <button class="tool-btn" title="Circle" onclick="setTool(this,'circle')">○</button>
+    <button class="tool-btn" title="Triangle" onclick="setTool(this,'triangle')">△</button>
+    <button class="tool-btn" title="Arrow" onclick="setTool(this,'arrow')">↗</button>
+
     <div class="tool-sep"></div>
-    <button class="tool-btn danger" title="Clear All" onclick="clearDrawings()">✕</button>
+    <div class="toolbar-section-label">ANNOT</div>
+    <button class="tool-btn" title="Text Label" onclick="setTool(this,'text')">T</button>
+    <button class="tool-btn" title="Price Label" onclick="setTool(this,'pricelabel')">$</button>
+    <button class="tool-btn" title="Callout" onclick="setTool(this,'callout')">💬</button>
+
+    <div class="tool-sep"></div>
+    <div class="toolbar-section-label">INDIC</div>
+    <button class="tool-btn" title="Add Indicator" onclick="showIndicatorMenu()">⊞</button>
+    <button class="tool-btn" title="Manage Indicators" onclick="showManagePane()">≡</button>
+
+    <div class="tool-sep"></div>
+    <button class="tool-btn danger" title="Clear All Drawings" onclick="clearDrawings()">✕</button>
   </div>
 
   <!-- CHART AREA -->
-  <div class="chart-wrap">
+  <div class="chart-wrap" id="chartWrap">
 
     <!-- INDICATOR PILLS -->
-    <div class="indicator-pills">
-      <span class="ind-pill ema" id="pill-ema9">EMA 9 <span class="pill-val">18,441</span> <span class="pill-x" onclick="toggleIndicator('ema9')">×</span></span>
-      <span class="ind-pill ema2" id="pill-ema21">EMA 21 <span class="pill-val">18,398</span> <span class="pill-x" onclick="toggleIndicator('ema21')">×</span></span>
-      <span class="ind-pill vwap" id="pill-vwap">VWAP <span class="pill-val">18,415</span> <span class="pill-x" onclick="toggleIndicator('vwap')">×</span></span>
+    <div class="indicator-pills" id="indicatorPills">
+      <span class="ind-pill ema" id="pill-ema9">EMA 9 <span class="pill-val" id="pv-ema9">—</span> <span class="pill-x" onclick="removeIndicator('ema9')">×</span></span>
+      <span class="ind-pill ema2" id="pill-ema21">EMA 21 <span class="pill-val" id="pv-ema21">—</span> <span class="pill-x" onclick="removeIndicator('ema21')">×</span></span>
+      <span class="ind-pill vwap" id="pill-vwap">VWAP <span class="pill-val" id="pv-vwap">—</span> <span class="pill-x" onclick="removeIndicator('vwap')">×</span></span>
       <span class="ind-pill add-ind" onclick="showIndicatorMenu()">＋ Indicator</span>
     </div>
 
@@ -87,91 +107,111 @@
 
     <!-- CROSSHAIR INFO -->
     <div class="crosshair-info" id="crosshairInfo" style="display:none">
-      <span id="ci-date">2024-03-01 14:00</span>
-      <span>O: <b id="ci-o">0</b></span>
-      <span>H: <b id="ci-h">0</b></span>
-      <span>L: <b id="ci-l">0</b></span>
-      <span>C: <b id="ci-c">0</b></span>
+      <span id="ci-date">—</span>
+      <span>O <b id="ci-o">—</b></span>
+      <span>H <b id="ci-h">—</b></span>
+      <span>L <b id="ci-l">—</b></span>
+      <span>C <b id="ci-c">—</b></span>
+      <span id="ci-chg" class="up">—</span>
     </div>
 
-    <!-- SIGNAL OVERLAYS -->
+    <!-- SIGNAL LEGEND -->
     <div class="signal-legend">
       <span class="sig-buy">▲ BUY</span>
       <span class="sig-sell">▼ SELL</span>
-      <span class="sig-count" id="sig-count">12 signals · 74% win rate</span>
+      <span class="sig-count" id="sig-count">— signals</span>
     </div>
 
-    <!-- RSI PANE -->
-    <div class="sub-pane" id="rsiPane">
-      <div class="sub-pane-label">RSI (14)</div>
-      <canvas id="rsiChart"></canvas>
-      <div class="rsi-levels">
-        <span class="rsi-ob">70</span>
-        <span class="rsi-os">30</span>
-        <span class="rsi-cur" id="rsiVal">58.4</span>
+    <!-- SUB PANES CONTAINER -->
+    <div id="subPanes">
+
+      <!-- RSI PANE -->
+      <div class="sub-pane" id="pane-rsi" data-indicator="rsi">
+        <div class="sub-pane-header">
+          <span class="sub-pane-label">RSI (14)</span>
+          <div class="sub-pane-controls">
+            <span class="spc-btn" onclick="changePaneIndicator('pane-rsi')">⚙</span>
+            <span class="spc-btn" onclick="removePaneIndicator('pane-rsi')">×</span>
+          </div>
+        </div>
+        <canvas id="rsiChart"></canvas>
+        <div class="rsi-levels">
+          <span class="rsi-ob">70</span>
+          <span class="rsi-mid">50</span>
+          <span class="rsi-os">30</span>
+        </div>
+        <div class="sub-pane-cur" id="rsi-cur">—</div>
       </div>
+
+      <!-- MACD PANE -->
+      <div class="sub-pane" id="pane-macd" data-indicator="macd">
+        <div class="sub-pane-header">
+          <span class="sub-pane-label">MACD (12,26,9)</span>
+          <div class="sub-pane-controls">
+            <span class="spc-btn" onclick="changePaneIndicator('pane-macd')">⚙</span>
+            <span class="spc-btn" onclick="removePaneIndicator('pane-macd')">×</span>
+          </div>
+        </div>
+        <canvas id="macdChart"></canvas>
+        <div class="macd-vals" id="macd-vals">— / — / —</div>
+      </div>
+
     </div>
 
-    <!-- MACD PANE -->
-    <div class="sub-pane" id="macdPane">
-      <div class="sub-pane-label">MACD (12,26,9)</div>
-      <canvas id="macdChart"></canvas>
+    <!-- TIME AXIS SCRUBBER -->
+    <div class="time-axis" id="timeAxis">
+      <div class="time-axis-track">
+        <div class="time-axis-labels" id="timeLabels"></div>
+        <div class="time-scrubber" id="timeScrubber">
+          <div class="scrubber-handle" id="scrubberHandle"></div>
+        </div>
+      </div>
     </div>
 
   </div>
 
   <!-- RIGHT PANEL -->
   <div class="right-panel">
-
-    <!-- TABS -->
     <div class="rp-tabs">
       <button class="rp-tab active" onclick="rpTab(this,'signals')">Signals</button>
       <button class="rp-tab" onclick="rpTab(this,'strategy')">Strategy</button>
       <button class="rp-tab" onclick="rpTab(this,'pnl')">P&amp;L</button>
     </div>
 
-    <!-- SIGNALS PANEL -->
+    <!-- SIGNALS -->
     <div class="rp-content active" id="rp-signals">
       <div class="rp-section-title">LIVE SIGNALS</div>
       <div class="signal-card buy">
         <div class="sc-top"><span class="sc-dir buy-label">▲ LONG</span><span class="sc-time">14:32</span></div>
         <div class="sc-sym">NQ1! · 1H</div>
-        <div class="sc-reason">EMA 9 crossed above EMA 21 · RSI 62 · Volume +180%</div>
-        <div class="sc-levels"><span class="sc-entry">Entry: 18,390</span><span class="sc-tp up">TP: 18,620</span><span class="sc-sl down">SL: 18,290</span></div>
+        <div class="sc-reason">EMA 9 × EMA 21 · RSI 62 · Volume +180%</div>
+        <div class="sc-levels"><span class="sc-entry">Entry 18,390</span><span class="sc-tp up">TP 18,620</span><span class="sc-sl down">SL 18,290</span></div>
         <div class="sc-rr">R:R 2.3 : 1</div>
       </div>
       <div class="signal-card sell">
         <div class="sc-top"><span class="sc-dir sell-label">▼ SHORT</span><span class="sc-time">11:15</span></div>
         <div class="sc-sym">NQ1! · 4H</div>
-        <div class="sc-reason">MACD bearish cross · Resistance reject · RSI 71 (OB)</div>
-        <div class="sc-levels"><span class="sc-entry">Entry: 18,510</span><span class="sc-tp up">TP: 18,280</span><span class="sc-sl down">SL: 18,590</span></div>
+        <div class="sc-reason">MACD bear cross · Resistance · RSI 71 OB</div>
+        <div class="sc-levels"><span class="sc-entry">Entry 18,510</span><span class="sc-tp up">TP 18,280</span><span class="sc-sl down">SL 18,590</span></div>
         <div class="sc-rr">R:R 2.8 : 1</div>
       </div>
-      <div class="signal-card buy">
-        <div class="sc-top"><span class="sc-dir buy-label">▲ LONG</span><span class="sc-time">Yesterday</span></div>
-        <div class="sc-sym">NQ1! · 1D</div>
-        <div class="sc-reason">VWAP reclaim + EMA stack bullish · Daily close strong</div>
-        <div class="sc-levels"><span class="sc-entry">Entry: 18,201</span><span class="sc-tp up">TP: 18,600</span><span class="sc-sl down">SL: 18,050</span></div>
-        <div class="sc-rr">R:R 2.6 : 1</div>
-      </div>
-      <div class="rp-section-title" style="margin-top:14px">INDICATOR VALUES</div>
-      <div class="ind-value-row"><span class="ivr-name">RSI (14)</span><span class="ivr-val" id="live-rsi">58.4</span></div>
-      <div class="ind-value-row"><span class="ivr-name">MACD</span><span class="ivr-val up">+12.4</span></div>
-      <div class="ind-value-row"><span class="ivr-name">Signal</span><span class="ivr-val up">+8.1</span></div>
-      <div class="ind-value-row"><span class="ivr-name">EMA 9</span><span class="ivr-val">18,441</span></div>
-      <div class="ind-value-row"><span class="ivr-name">EMA 21</span><span class="ivr-val">18,398</span></div>
-      <div class="ind-value-row"><span class="ivr-name">VWAP</span><span class="ivr-val">18,415</span></div>
-      <div class="ind-value-row"><span class="ivr-name">ATR (14)</span><span class="ivr-val">98.2</span></div>
+      <div class="rp-section-title" style="margin-top:12px">INDICATOR VALUES</div>
+      <div class="ind-value-row"><span class="ivr-name">RSI (14)</span><span class="ivr-val" id="live-rsi">—</span></div>
+      <div class="ind-value-row"><span class="ivr-name">MACD</span><span class="ivr-val up" id="live-macd">—</span></div>
+      <div class="ind-value-row"><span class="ivr-name">EMA 9</span><span class="ivr-val" id="live-ema9">—</span></div>
+      <div class="ind-value-row"><span class="ivr-name">EMA 21</span><span class="ivr-val" id="live-ema21">—</span></div>
+      <div class="ind-value-row"><span class="ivr-name">VWAP</span><span class="ivr-val" id="live-vwap">—</span></div>
+      <div class="ind-value-row"><span class="ivr-name">ATR (14)</span><span class="ivr-val" id="live-atr">—</span></div>
     </div>
 
-    <!-- STRATEGY PANEL -->
+    <!-- STRATEGY -->
     <div class="rp-content" id="rp-strategy">
       <div class="rp-section-title">STRATEGY BUILDER</div>
       <div class="strat-row">
         <label class="strat-label">Entry Condition</label>
-        <select class="strat-select" id="entry-cond">
+        <select class="strat-select">
           <option>EMA 9 crosses above EMA 21</option>
-          <option>RSI crosses above 30 (oversold)</option>
+          <option>RSI crosses above 30</option>
           <option>MACD bullish crossover</option>
           <option>Price reclaims VWAP</option>
           <option>Breakout above resistance</option>
@@ -179,56 +219,40 @@
       </div>
       <div class="strat-row">
         <label class="strat-label">Exit Condition</label>
-        <select class="strat-select" id="exit-cond">
+        <select class="strat-select">
           <option>EMA 9 crosses below EMA 21</option>
-          <option>RSI above 70 (overbought)</option>
+          <option>RSI above 70</option>
           <option>MACD bearish crossover</option>
           <option>Fixed R:R 2:1</option>
           <option>Trailing stop 1.5%</option>
         </select>
       </div>
       <div class="strat-row two-col">
-        <div>
-          <label class="strat-label">Stop Loss</label>
-          <input class="strat-input" type="text" value="0.5%" id="sl-input">
-        </div>
-        <div>
-          <label class="strat-label">Take Profit</label>
-          <input class="strat-input" type="text" value="1.2%" id="tp-input">
-        </div>
+        <div><label class="strat-label">Stop Loss</label><input class="strat-input" type="text" value="0.5%"></div>
+        <div><label class="strat-label">Take Profit</label><input class="strat-input" type="text" value="1.2%"></div>
       </div>
       <div class="strat-row two-col">
-        <div>
-          <label class="strat-label">Timeframe</label>
-          <select class="strat-select" id="bt-tf">
-            <option>1H</option><option>4H</option><option>1D</option><option>15m</option>
-          </select>
-        </div>
-        <div>
-          <label class="strat-label">Lookback</label>
-          <select class="strat-select" id="bt-lookback">
-            <option>30 days</option><option>90 days</option><option>6 months</option><option>1 year</option>
-          </select>
-        </div>
+        <div><label class="strat-label">Timeframe</label><select class="strat-select"><option>1H</option><option>4H</option><option>1D</option><option>15m</option></select></div>
+        <div><label class="strat-label">Lookback</label><select class="strat-select"><option>30 days</option><option>90 days</option><option>6 months</option><option>1 year</option></select></div>
       </div>
       <button class="bt-run-btn" onclick="runBacktest()">▶ RUN BACKTEST</button>
       <div class="bt-results" id="bt-results" style="display:none">
         <div class="bt-stat-grid">
-          <div class="bt-stat"><div class="bt-stat-val up" id="bt-winrate">74%</div><div class="bt-stat-label">Win Rate</div></div>
-          <div class="bt-stat"><div class="bt-stat-val up" id="bt-pf">2.1</div><div class="bt-stat-label">Profit Factor</div></div>
-          <div class="bt-stat"><div class="bt-stat-val up" id="bt-trades">48</div><div class="bt-stat-label">Trades</div></div>
-          <div class="bt-stat"><div class="bt-stat-val up" id="bt-return">+21.4%</div><div class="bt-stat-label">Net Return</div></div>
-          <div class="bt-stat"><div class="bt-stat-val down" id="bt-dd">-4.2%</div><div class="bt-stat-label">Max DD</div></div>
-          <div class="bt-stat"><div class="bt-stat-val up" id="bt-sharpe">1.84</div><div class="bt-stat-label">Sharpe</div></div>
+          <div class="bt-stat"><div class="bt-stat-val up" id="bt-winrate">—</div><div class="bt-stat-label">Win Rate</div></div>
+          <div class="bt-stat"><div class="bt-stat-val up" id="bt-pf">—</div><div class="bt-stat-label">Profit Factor</div></div>
+          <div class="bt-stat"><div class="bt-stat-val up" id="bt-trades">—</div><div class="bt-stat-label">Trades</div></div>
+          <div class="bt-stat"><div class="bt-stat-val up" id="bt-return">—</div><div class="bt-stat-label">Net Return</div></div>
+          <div class="bt-stat"><div class="bt-stat-val down" id="bt-dd">—</div><div class="bt-stat-label">Max DD</div></div>
+          <div class="bt-stat"><div class="bt-stat-val up" id="bt-sharpe">—</div><div class="bt-stat-label">Sharpe</div></div>
         </div>
       </div>
     </div>
 
-    <!-- P&L PANEL -->
+    <!-- P&L -->
     <div class="rp-content" id="rp-pnl">
       <div class="rp-section-title">EQUITY CURVE</div>
-      <canvas id="equityChart" height="140"></canvas>
-      <div class="rp-section-title" style="margin-top:14px">TRADE LOG</div>
+      <canvas id="equityChart" height="130"></canvas>
+      <div class="rp-section-title" style="margin-top:12px">TRADE LOG</div>
       <div class="trade-log">
         <div class="tl-row win"><span class="tl-sym">NQ1!</span><span class="tl-dir">LONG</span><span class="tl-pnl up">+$312</span><span class="tl-pct up">+1.7%</span></div>
         <div class="tl-row win"><span class="tl-sym">NQ1!</span><span class="tl-dir">SHORT</span><span class="tl-pnl up">+$228</span><span class="tl-pct up">+1.2%</span></div>
@@ -237,7 +261,6 @@
         <div class="tl-row win"><span class="tl-sym">NQ1!</span><span class="tl-dir">SHORT</span><span class="tl-pnl up">+$186</span><span class="tl-pct up">+1.0%</span></div>
         <div class="tl-row loss"><span class="tl-sym">NQ1!</span><span class="tl-dir">SHORT</span><span class="tl-pnl down">-$156</span><span class="tl-pct down">-0.8%</span></div>
         <div class="tl-row win"><span class="tl-sym">NQ1!</span><span class="tl-dir">LONG</span><span class="tl-pnl up">+$408</span><span class="tl-pct up">+2.2%</span></div>
-        <div class="tl-row win"><span class="tl-sym">NQ1!</span><span class="tl-dir">LONG</span><span class="tl-pnl up">+$264</span><span class="tl-pct up">+1.4%</span></div>
       </div>
       <div class="pnl-summary">
         <div class="pnl-sum-item"><div class="pnl-sum-label">Total P&L</div><div class="pnl-sum-val up">+$1,688</div></div>
@@ -246,7 +269,6 @@
         <div class="pnl-sum-item"><div class="pnl-sum-label">Avg Loss</div><div class="pnl-sum-val down">-$125</div></div>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -254,25 +276,46 @@
 <div class="modal-overlay" id="indModal" onclick="hideIndicatorMenu()">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-title">Add Indicator</div>
-    <div class="modal-grid">
-      <div class="modal-ind" onclick="addIndicator('RSI')">RSI</div>
-      <div class="modal-ind" onclick="addIndicator('MACD')">MACD</div>
-      <div class="modal-ind" onclick="addIndicator('EMA')">EMA</div>
-      <div class="modal-ind" onclick="addIndicator('VWAP')">VWAP</div>
-      <div class="modal-ind" onclick="addIndicator('BB')">Bollinger Bands</div>
-      <div class="modal-ind" onclick="addIndicator('ATR')">ATR</div>
-      <div class="modal-ind" onclick="addIndicator('STOCH')">Stochastic</div>
-      <div class="modal-ind" onclick="addIndicator('OBV')">OBV</div>
-      <div class="modal-ind" onclick="addIndicator('ICHIMOKU')">Ichimoku</div>
-      <div class="modal-ind" onclick="addIndicator('SUPERTREND')">SuperTrend</div>
+    <input class="modal-search" type="text" placeholder="Search indicators..." oninput="filterIndicators(this.value)">
+    <div class="modal-grid" id="indicatorGrid">
+      <div class="modal-ind" data-name="RSI" onclick="addIndicator('RSI')">RSI</div>
+      <div class="modal-ind" data-name="MACD" onclick="addIndicator('MACD')">MACD</div>
+      <div class="modal-ind" data-name="EMA" onclick="addIndicator('EMA')">EMA</div>
+      <div class="modal-ind" data-name="VWAP" onclick="addIndicator('VWAP')">VWAP</div>
+      <div class="modal-ind" data-name="Bollinger Bands" onclick="addIndicator('BB')">Bollinger Bands</div>
+      <div class="modal-ind" data-name="ATR" onclick="addIndicator('ATR')">ATR</div>
+      <div class="modal-ind" data-name="Stochastic" onclick="addIndicator('STOCH')">Stochastic</div>
+      <div class="modal-ind" data-name="OBV" onclick="addIndicator('OBV')">OBV</div>
+      <div class="modal-ind" data-name="Ichimoku" onclick="addIndicator('ICHIMOKU')">Ichimoku</div>
+      <div class="modal-ind" data-name="SuperTrend" onclick="addIndicator('SUPERTREND')">SuperTrend</div>
+      <div class="modal-ind" data-name="Williams %R" onclick="addIndicator('WILLR')">Williams %R</div>
+      <div class="modal-ind" data-name="CCI" onclick="addIndicator('CCI')">CCI</div>
+      <div class="modal-ind" data-name="Volume" onclick="addIndicator('VOL')">Volume</div>
+      <div class="modal-ind" data-name="VWMA" onclick="addIndicator('VWMA')">VWMA</div>
     </div>
     <button class="modal-close" onclick="hideIndicatorMenu()">Close</button>
   </div>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<!-- PANE CHANGE MODAL -->
+<div class="modal-overlay" id="paneModal" onclick="hidePaneModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-title">Change Pane Indicator</div>
+    <div class="modal-grid" id="paneIndicatorGrid">
+      <div class="modal-ind" onclick="setPaneIndicator('rsi')">RSI</div>
+      <div class="modal-ind" onclick="setPaneIndicator('macd')">MACD</div>
+      <div class="modal-ind" onclick="setPaneIndicator('stoch')">Stochastic</div>
+      <div class="modal-ind" onclick="setPaneIndicator('cci')">CCI</div>
+      <div class="modal-ind" onclick="setPaneIndicator('atr')">ATR</div>
+      <div class="modal-ind" onclick="setPaneIndicator('obv')">OBV</div>
+      <div class="modal-ind" onclick="setPaneIndicator('willr')">Williams %R</div>
+      <div class="modal-ind" onclick="setPaneIndicator('volume')">Volume</div>
+    </div>
+    <button class="modal-close" onclick="hidePaneModal()">Cancel</button>
+  </div>
+</div>
 
+<div class="toast" id="toast"></div>
 <script src="app.js"></script>
 </body>
 </html>
