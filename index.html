@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONEYBASE v2 — Auto-Earn Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="toast" id="toast">✅ Auto-Earn Engine Activated!</div>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">MONEY<span>BASE</span> <sub>AUTO</sub></div>
+    <div class="header-right">
+      <div class="notif-btn">🔔<div class="notif-dot"></div></div>
+      <div class="avatar">MB</div>
+    </div>
+  </div>
+
+  <div class="auto-banner">
+    <div class="pulse-dot"></div>
+    <div class="banner-text">
+      <div class="banner-title">AUTO-EARN ENGINE ACTIVE</div>
+      <div class="banner-sub">4 strategies running · Last yield: 3m ago</div>
+    </div>
+    <div class="banner-earn">
+      <div class="banner-amount" id="live-earn">$0.0000</div>
+      <div class="banner-label">TODAY'S AUTO</div>
+    </div>
+  </div>
+
+  <div class="portfolio-card">
+    <div class="card-label">Total Earnings Hub</div>
+    <div class="card-value" id="total-val">$4,821.50</div>
+    <div class="card-change">▲ +$312.60 today</div>
+    <div class="card-row">
+      <div class="card-stat"><div class="stat-label">Auto-Yield</div><div class="stat-val up" id="auto-stat">+$43.20</div></div>
+      <div class="card-stat"><div class="stat-label">Trading P&L</div><div class="stat-val up">+$142.80</div></div>
+      <div class="card-stat"><div class="stat-label">Gigs/Tasks</div><div class="stat-val up">+$126.60</div></div>
+    </div>
+  </div>
+
+  <div class="tab-nav">
+    <button class="tab-btn active"  onclick="switchTab('autoearner')">⚡ Auto-Earn</button>
+    <button class="tab-btn"         onclick="switchTab('zerodollars')">🆓 $0 Strats</button>
+    <button class="tab-btn"         onclick="switchTab('markets')">📊 Markets</button>
+    <button class="tab-btn"         onclick="switchTab('crypto')">🔗 Crypto</button>
+    <button class="tab-btn"         onclick="switchTab('earn')">💰 Earn</button>
+    <button class="tab-btn"         onclick="switchTab('ai')">🤖 AI Brain</button>
+    <button class="tab-btn"         onclick="switchTab('tracker')">📈 Tracker</button>
+  </div>
+
+  <!-- AUTO EARN TAB -->
+  <div id="tab-autoearner" class="tab-content active">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Auto-Earn Engines ⚡</div>
+        <div class="see-all" onclick="activateAll()">START ALL →</div>
+      </div>
+
+      <div class="engine-card running" id="eng1">
+        <div class="engine-header" onclick="toggleEngine('eng1-body')">
+          <div class="engine-icon">🪣</div>
+          <div class="engine-info">
+            <div class="engine-name">Crypto Faucet Loop</div>
+            <div class="engine-desc">Claim free crypto → stake → compound daily</div>
+          </div>
+          <div class="engine-right">
+            <div class="engine-apy">~$0.50/day</div>
+            <div class="engine-status status-running">● RUNNING</div>
+          </div>
+        </div>
+        <div class="engine-body open" id="eng1-body">
+          <div class="steps-title">HOW IT WORKS</div>
+          <div class="step-item"><div class="step-num step-done">✓</div><div class="step-text">Create free wallet on <a href="#">Coinbase</a> or <a href="#">Trust Wallet</a></div></div>
+          <div class="step-item"><div class="step-num step-done">✓</div><div class="step-text">Claim free BTC/ETH from <strong>Cointiply, FaucetPay, or FreeBitcoin</strong> every hour</div></div>
+          <div class="step-item"><div class="step-num step-active">2</div><div class="step-text">Stake claimed tokens on <strong>Binance Earn</strong> at 3–8% APY — zero lockup</div></div>
+          <div class="step-item"><div class="step-num step-todo">3</div><div class="step-text">Enable auto-compound — daily interest reinvests automatically</div></div>
+          <div class="earn-meter">
+            <div class="meter-row"><div class="meter-label">DAILY CLAIM PROGRESS</div><div class="meter-val" id="faucet-pct">68%</div></div>
+            <div class="meter-bar"><div class="meter-fill" id="faucet-bar" style="width:68%"></div></div>
+          </div>
+          <div class="engine-actions">
+            <button class="btn-start active-btn" id="btn-eng1" onclick="toggleBot('eng1')">⏸ Pause Engine</button>
+            <button class="btn-guide">📋 Full Guide</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="engine-card running" id="eng2">
+        <div class="engine-header" onclick="toggleEngine('eng2-body')">
+          <div class="engine-icon">🪂</div>
+          <div class="engine-info">
+            <div class="engine-name">Airdrop Hunter Bot</div>
+            <div class="engine-desc">Auto-track + complete testnet tasks for free tokens</div>
+          </div>
+          <div class="engine-right">
+            <div class="engine-apy">$10–500/drop</div>
+            <div class="engine-status status-running">● HUNTING</div>
+          </div>
+        </div>
+        <div class="engine-body open" id="eng2-body">
+          <div class="steps-title">ACTIVE HUNTS</div>
+          <div class="step-item"><div class="step-num step-done">✓</div><div class="step-text"><strong>LayerZero Testnet</strong> — Bridge between chains. Est. airdrop: $50–$800</div></div>
+          <div class="step-item"><div class="step-num step-active">!</div><div class="step-text"><strong>zkSync Era</strong> — Make 3+ transactions. Est. value: $100–$1,200</div></div>
+          <div class="step-item"><div class="step-num step-todo">3</div><div class="step-text"><strong>Scroll Protocol</strong> — Use testnet bridge + swap DEX. Track at airdrops.io</div></div>
+          <div class="earn-meter">
+            <div class="meter-row"><div class="meter-label">TASKS COMPLETED</div><div class="meter-val">2 / 3</div></div>
+            <div class="meter-bar"><div class="meter-fill" style="width:66%"></div></div>
+          </div>
+          <div class="engine-actions">
+            <button class="btn-start active-btn" onclick="showToast('🪂 Airdrop scan running!')">⏸ Pause Hunt</button>
+            <button class="btn-guide">📋 Full Guide</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="engine-card pending" id="eng3">
+        <div class="engine-header" onclick="toggleEngine('eng3-body')">
+          <div class="engine-icon">🔗</div>
+          <div class="engine-info">
+            <div class="engine-name">Referral Link Machine</div>
+            <div class="engine-desc">Passive income from crypto app referrals</div>
+          </div>
+          <div class="engine-right">
+            <div class="engine-apy">$5–50/ref</div>
+            <div class="engine-status status-setup">◐ SETUP</div>
+          </div>
+        </div>
+        <div class="engine-body" id="eng3-body">
+          <div class="steps-title">TOP REFERRAL PROGRAMS</div>
+          <div class="step-item"><div class="step-num step-done">✓</div><div class="step-text"><strong>Coinbase</strong> — $10 BTC per referral when they buy $100</div></div>
+          <div class="step-item"><div class="step-num step-active">!</div><div class="step-text"><strong>Nexo</strong> — 10% of referred user's interest for life</div></div>
+          <div class="step-item"><div class="step-num step-todo">3</div><div class="step-text"><strong>Robinhood</strong> — Free stock referral ($5–$200 value)</div></div>
+          <div class="step-item"><div class="step-num step-todo">4</div><div class="step-text">Create a free <strong>Linktree</strong> with all referral links — one bio link everywhere</div></div>
+          <div class="engine-actions">
+            <button class="btn-start" id="btn-eng3" onclick="activateEngine('eng3','btn-eng3')">▶ Activate Engine</button>
+            <button class="btn-guide">📋 Full Guide</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="engine-card running" id="eng4">
+        <div class="engine-header" onclick="toggleEngine('eng4-body')">
+          <div class="engine-icon">🏦</div>
+          <div class="engine-info">
+            <div class="engine-name">DeFi Yield Stacker</div>
+            <div class="engine-desc">USDC lending on Aave — auto-compound interest</div>
+          </div>
+          <div class="engine-right">
+            <div class="engine-apy">6–12% APY</div>
+            <div class="engine-status status-running">● EARNING</div>
+          </div>
+        </div>
+        <div class="engine-body open" id="eng4-body">
+          <div class="steps-title">ZERO-CAPITAL ENTRY PATH</div>
+          <div class="step-item"><div class="step-num step-done">✓</div><div class="step-text"><strong>Coinbase Earn</strong> — Watch 3 videos = $3–15 USDC free, no deposit needed</div></div>
+          <div class="step-item"><div class="step-num step-done">✓</div><div class="step-text">Bridge USDC to <strong>Polygon</strong> (near-zero fees). Connect to <strong>Aave v3</strong></div></div>
+          <div class="step-item"><div class="step-num step-active">!</div><div class="step-text">Supply USDC to Aave. Current APY: <strong>8.2%</strong>. Earns every ~12 seconds</div></div>
+          <div class="step-item"><div class="step-num step-todo">4</div><div class="step-text">Use <strong>Yearn Finance</strong> vault to auto-compound and maximize yield</div></div>
+          <div class="earn-meter">
+            <div class="meter-row"><div class="meter-label">YIELD EARNED TODAY</div><div class="meter-val" id="defi-earn">$0.2300</div></div>
+            <div class="meter-bar"><div class="meter-fill" id="defi-bar" style="width:23%"></div></div>
+          </div>
+          <div class="engine-actions">
+            <button class="btn-start active-btn" onclick="showToast('💰 DeFi yield is compounding!')">⏸ Pause Stack</button>
+            <button class="btn-guide">📋 Full Guide</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="engine-card pending" id="eng5">
+        <div class="engine-header" onclick="toggleEngine('eng5-body')">
+          <div class="engine-icon">🎓</div>
+          <div class="engine-info">
+            <div class="engine-name">Learn-to-Earn Loop</div>
+            <div class="engine-desc">Watch videos & quizzes → earn real crypto rewards</div>
+          </div>
+          <div class="engine-right">
+            <div class="engine-apy">$15–40/hr</div>
+            <div class="engine-status status-setup">◐ READY</div>
+          </div>
+        </div>
+        <div class="engine-body" id="eng5-body">
+          <div class="steps-title">FREE PLATFORMS THAT PAY YOU TO LEARN</div>
+          <div class="step-item"><div class="step-num step-active">1</div><div class="step-text"><strong>Coinbase Earn</strong> — Short lessons = $3–$50 per module in real tokens</div></div>
+          <div class="step-item"><div class="step-num step-todo">2</div><div class="step-text"><strong>Binance Learn & Earn</strong> — Quiz rewards up to $50 USDT. New campaigns weekly</div></div>
+          <div class="step-item"><div class="step-num step-todo">3</div><div class="step-text"><strong>Sweat Economy</strong> — Walk 1,000 steps = crypto tokens. Pure passive</div></div>
+          <div class="step-item"><div class="step-num step-todo">4</div><div class="step-text"><strong>Layer3 / RabbitHole</strong> — On-chain quests rewarding protocol use with NFTs + tokens</div></div>
+          <div class="engine-actions">
+            <button class="btn-start" id="btn-eng5" onclick="activateEngine('eng5','btn-eng5')">▶ Start Learning</button>
+            <button class="btn-guide">📋 Full Guide</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- $0 STRATEGIES TAB -->
+  <div id="tab-zerodollars" class="tab-content">
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">$0 Down Strategies 🆓</div>
+        <div class="see-all">NO CAPITAL NEEDED</div>
+      </div>
+      <div class="tip-box"><strong>💡 The Zero-Dollar Rule:</strong> Every strategy below requires $0 to start. Build capital with free methods first, then reinvest into higher-yield engines.</div>
+
+      <div class="strategy-card strat-green">
+        <div class="strat-header"><div class="strat-icon">🚶</div><div class="strat-title">Walk-to-Earn (Sweat Economy)</div><div class="strat-badge badge-free">$0</div></div>
+        <div class="strat-desc">Download SWEAT Wallet. Every 1,000 steps earns SWEAT tokens. Average $3–$10/week just from daily walks. Stake tokens for additional APY.</div>
+        <div class="strat-earn">$3–10/week · <span class="strat-time">0 hrs active work</span></div>
+      </div>
+
+      <div class="strategy-card strat-blue">
+        <div class="strat-header"><div class="strat-icon">📡</div><div class="strat-title">Sell Your Bandwidth (Honeygain)</div><div class="strat-badge badge-low">PASSIVE</div></div>
+        <div class="strat-desc">Share idle WiFi bandwidth on <strong>Honeygain</strong> or <strong>Peer2Profit</strong>. Earn $20–80/month running an app in the background. No effort after setup.</div>
+        <div class="strat-earn">$20–80/month · <span class="strat-time">fully passive</span></div>
+      </div>
+
+      <div class="strategy-card strat-gold">
+        <div class="strat-header"><div class="strat-icon">🖥️</div><div class="strat-title">Sell Idle CPU/GPU Power</div><div class="strat-badge badge-auto">AUTO</div></div>
+        <div class="strat-desc">Use <strong>Salad.io</strong>, <strong>NiceHash</strong>, or <strong>Vast.ai</strong> to rent out your computer's idle processing power. Earns while you sleep, paid in BTC or USD.</div>
+        <div class="strat-earn">$5–50/month · <span class="strat-time">zero active effort</span></div>
+      </div>
+
+      <div class="strategy-card strat-purple">
+        <div class="strat-header"><div class="strat-icon">🎮</div><div class="strat-title">Play-to-Earn (P2E) Games</div><div class="strat-badge badge-free">$0</div></div>
+        <div class="strat-desc"><strong>Axie Infinity Scholarship</strong>: Borrow NFTs, split earnings. <strong>Gods Unchained</strong>: Free cards, real money tournaments. <strong>Rollbit</strong>: Free spin rewards → BTC.</div>
+        <div class="strat-earn">$5–40/day · <span class="strat-time">1–2 hrs gaming</span></div>
+      </div>
+
+      <div class="strategy-card strat-orange">
+        <div class="strat-header"><div class="strat-icon">🐦</div><div class="strat-title">X/Twitter Crypto Creator</div><div class="strat-badge badge-free">$0</div></div>
+        <div class="strat-desc">Post daily market analysis using MoneyBase signals. Grow to 1K followers → monetize with X Premium revenue share. Add affiliate links for $5–50 CPA.</div>
+        <div class="strat-earn">$50–500/month · <span class="strat-time">30 min/day</span></div>
+      </div>
+
+      <div class="strategy-card strat-green">
+        <div class="strat-header"><div class="strat-icon">📋</div><div class="strat-title">Microtask + Survey Sprint</div><div class="strat-badge badge-free">$0</div></div>
+        <div class="strat-desc">Combine <strong>Prolific</strong> ($10–15/hr), <strong>MTurk</strong> HITs, and <strong>Swagbucks</strong> daily tasks. Stack gift cards → PayPal → buy crypto on Coinbase.</div>
+        <div class="strat-earn">$10–40/day · <span class="strat-time">1–2 hrs active</span></div>
+      </div>
+
+      <div class="strategy-card strat-blue">
+        <div class="strat-header"><div class="strat-icon">🤖</div><div class="strat-title">AI Content + Affiliate Stack</div><div class="strat-badge badge-auto">AUTO</div></div>
+        <div class="strat-desc">Use free AI tools to write SEO blogs, post to <strong>Medium Partner Program</strong> or <strong>Publish0x</strong> (pays crypto). Embed Binance/Coinbase affiliate links. Automated pipeline.</div>
+        <div class="strat-earn">$30–200/month · <span class="strat-time">set-and-forget</span></div>
+      </div>
+
+      <div class="strategy-card strat-purple">
+        <div class="strat-header"><div class="strat-icon">🏆</div><div class="strat-title">Crypto Trading Competitions</div><div class="strat-badge badge-free">$0</div></div>
+        <div class="strat-desc"><strong>Binance paper trading tournaments</strong> offer $500–$5,000 in real USDT prizes. Use MoneyBase signals to compete. <strong>Bybit Demo League</strong> runs monthly.</div>
+        <div class="strat-earn">$500–5,000 prizes · <span class="strat-time">no real risk</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETS TAB -->
+  <div id="tab-markets" class="tab-content">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Market Watch 📊</div><div class="see-all">LIVE ●</div></div>
+      <div class="market-row"><div class="market-left"><div class="market-icon" style="background:rgba(6,214,160,0.1)">📈</div><div><div class="market-name">S&P 500 <span class="futures-tag tag-futures">FUTURES</span></div><div class="market-sub">ES1! · CME</div></div></div><div class="market-right"><div class="market-price">5,421.25</div><div class="market-change up">▲ +0.82%</div></div></div>
+      <div class="market-row"><div class="market-left"><div class="market-icon" style="background:rgba(240,180,41,0.1)">🛢️</div><div><div class="market-name">Crude Oil <span class="futures-tag tag-futures">FUTURES</span></div><div class="market-sub">CL1! · NYMEX</div></div></div><div class="market-right"><div class="market-price">$78.42</div><div class="market-change down">▼ -1.14%</div></div></div>
+      <div class="market-row"><div class="market-left"><div class="market-icon" style="background:rgba(240,180,41,0.15)">🥇</div><div><div class="market-name">Gold <span class="futures-tag tag-futures">FUTURES</span></div><div class="market-sub">GC1! · COMEX</div></div></div><div class="market-right"><div class="market-price">$2,089.40</div><div class="market-change up">▲ +0.44%</div></div></div>
+      <div class="market-row"><div class="market-left"><div class="market-icon" style="background:rgba(58,134,255,0.1)">📱</div><div><div class="market-name">NVDA <span class="futures-tag tag-stock">STOCK</span></div><div class="market-sub">NASDAQ · Tech</div></div></div><div class="market-right"><div class="market-price">$875.40</div><div class="market-change up">▲ +2.31%</div></div></div>
+      <div class="market-row"><div class="market-left"><div class="market-icon" style="background:rgba(240,180,41,0.08)">💱</div><div><div class="market-name">EUR/USD <span class="futures-tag tag-forex">FOREX</span></div><div class="market-sub">FX · Spot Rate</div></div></div><div class="market-right"><div class="market-price">1.0842</div><div class="market-change down">▼ -0.18%</div></div></div>
+    </div>
+    <div class="section">
+      <div class="section-header"><div class="section-title">Today's Signals 🎯</div></div>
+      <div class="tip-box"><strong>🔥 NVDA Breakout Alert</strong> — RSI crossed 65 on 4H. Volume spike +180% avg. Last 3 similar setups averaged +8.2% within 72hrs.</div>
+      <div class="tip-box"><strong>⚠️ Oil Reversal Warning</strong> — CL1! approaching support at $77.80. EIA report Thursday 10:30AM EST.</div>
+    </div>
+  </div>
+
+  <!-- CRYPTO TAB -->
+  <div id="tab-crypto" class="tab-content">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Crypto Yield ⚡</div><div class="see-all">AUTO-COMPOUND ON</div></div>
+      <div class="crypto-row"><div class="crypto-icon">🟡</div><div class="crypto-info"><div class="crypto-name">Bitcoin — Binance Earn</div><div class="crypto-type">Flexible Savings · Auto-compound</div></div><div><div class="crypto-apy">4.5% APY</div><div class="apy-label">YIELD</div></div></div>
+      <div class="crypto-row"><div class="crypto-icon">🔵</div><div class="crypto-info"><div class="crypto-name">ETH — Lido Staking</div><div class="crypto-type">Liquid Staking · stETH rewards</div></div><div><div class="crypto-apy">3.8% APY</div><div class="apy-label">YIELD</div></div></div>
+      <div class="crypto-row"><div class="crypto-icon">🟢</div><div class="crypto-info"><div class="crypto-name">USDC — Aave DeFi</div><div class="crypto-type">Lending Pool · No lock-up</div></div><div><div class="crypto-apy">8.2% APY</div><div class="apy-label">YIELD</div></div></div>
+      <div class="crypto-row"><div class="crypto-icon">🪂</div><div class="crypto-info"><div class="crypto-name">Airdrop Tracker</div><div class="crypto-type">3 active testnet opportunities</div></div><div><div class="crypto-apy">FREE</div><div class="apy-label">POTENTIAL</div></div></div>
+      <div class="crypto-row"><div class="crypto-icon">🎮</div><div class="crypto-info"><div class="crypto-name">P2E Games</div><div class="crypto-type">Axie, Gods Unchained, Splinterlands</div></div><div><div class="crypto-apy">$5–40/d</div><div class="apy-label">EARN</div></div></div>
+    </div>
+  </div>
+
+  <!-- EARN TAB -->
+  <div id="tab-earn" class="tab-content">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Earning Engines 💰</div></div>
+      <div class="earn-grid">
+        <div class="earn-card"><div class="earn-badge">DAILY</div><div class="earn-card-icon">📝</div><div class="earn-card-title">Survey Hub</div><div class="earn-card-desc">Prolific, Swagbucks & MTurk</div><div class="earn-potential">$5–30/day</div></div>
+        <div class="earn-card"><div class="earn-badge">PASSIVE</div><div class="earn-card-icon">📺</div><div class="earn-card-title">Content $</div><div class="earn-card-desc">YouTube, newsletter & products</div><div class="earn-potential">$20–500/mo</div></div>
+        <div class="earn-card"><div class="earn-card-icon">🏠</div><div class="earn-card-title">Rental Yield</div><div class="earn-card-desc">Airbnb, Turo, asset rentals</div><div class="earn-potential">$50–300/day</div></div>
+        <div class="earn-card"><div class="earn-badge">HOT</div><div class="earn-card-icon">📦</div><div class="earn-card-title">Flip Finder</div><div class="earn-card-desc">eBay, FB Marketplace arb</div><div class="earn-potential">$15–150/flip</div></div>
+        <div class="earn-card"><div class="earn-card-icon">💎</div><div class="earn-card-title">Dividends</div><div class="earn-card-desc">High-yield dividend tracker</div><div class="earn-potential">Ongoing</div></div>
+        <div class="earn-card"><div class="earn-badge">NEW</div><div class="earn-card-icon">🤖</div><div class="earn-card-title">AI Services</div><div class="earn-card-desc">Sell AI automation & gigs</div><div class="earn-potential">$50–500/gig</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI BRAIN TAB -->
+  <div id="tab-ai" class="tab-content">
+    <div class="section">
+      <div class="ai-brief">
+        <div class="ai-label">AI DAILY BRIEF</div>
+        <div class="ai-title">Your $0 Action Plan — Today</div>
+        <div class="ai-item"><div class="ai-num">1</div><div>Complete <strong>Coinbase Earn</strong> — 3 available modules worth est. $12 in free crypto. Takes 15 minutes. Funds go straight to your DeFi yield engine.</div></div>
+        <div class="ai-item"><div class="ai-num">2</div><div>NVDA showing bullish breakout. Enter <strong>Binance paper trading tournament</strong> now — $1,000 USDT prize pool, zero real money at risk.</div></div>
+        <div class="ai-item"><div class="ai-num">3</div><div><strong>Honeygain</strong> accumulated $0.80 overnight. Passive meter at 68%. $5 cashout threshold almost reached.</div></div>
+      </div>
+      <div class="tip-box"><strong>🔵 Zero-to-$100 Roadmap:</strong> Week 1: Learn-to-earn ($15 free crypto) + surveys ($30). Week 2: Stake in Aave, start referrals. Week 3: First compound interest hits. Month 2: Passive income covers daily coffee. Month 6: $50–200/month on autopilot.</div>
+    </div>
+  </div>
+
+  <!-- TRACKER TAB -->
+  <div id="tab-tracker" class="tab-content">
+    <div class="section">
+      <div class="section-header"><div class="section-title">Income Tracker 📈</div><div class="see-all">THIS MONTH</div></div>
+      <div class="income-row"><div class="income-icon">⚡</div><div style="flex:1"><div class="income-source">DeFi Yield — Aave USDC</div><div class="income-sub">Auto-compound · 8.2% APY</div><div class="progress-mini"><div class="progress-mini-fill" style="width:82%"></div></div></div><div><div class="income-amount up">+$43.20</div><div class="income-period">MTD</div></div></div>
+      <div class="income-row"><div class="income-icon">🪂</div><div style="flex:1"><div class="income-source">Airdrop Rewards</div><div class="income-sub">LayerZero + zkSync tasks</div><div class="progress-mini"><div class="progress-mini-fill" style="width:10%"></div></div></div><div><div class="income-amount" style="color:var(--muted)">$0.00</div><div class="income-period">PENDING</div></div></div>
+      <div class="income-row"><div class="income-icon">🔗</div><div style="flex:1"><div class="income-source">Referral Commissions</div><div class="income-sub">Coinbase + Robinhood</div><div class="progress-mini"><div class="progress-mini-fill" style="width:30%"></div></div></div><div><div class="income-amount up">+$20.00</div><div class="income-period">MTD</div></div></div>
+      <div class="income-row"><div class="income-icon">🖥️</div><div style="flex:1"><div class="income-source">Bandwidth / CPU Share</div><div class="income-sub">Honeygain passive</div><div class="progress-mini"><div class="progress-mini-fill" style="width:55%"></div></div></div><div><div class="income-amount up">+$11.40</div><div class="income-period">MTD</div></div></div>
+      <div class="income-row"><div class="income-icon">🎓</div><div style="flex:1"><div class="income-source">Learn-to-Earn</div><div class="income-sub">Coinbase Earn + Binance</div><div class="progress-mini"><div class="progress-mini-fill" style="width:90%"></div></div></div><div><div class="income-amount up">+$27.50</div><div class="income-period">MTD</div></div></div>
+      <div class="income-row"><div class="income-icon">📝</div><div style="flex:1"><div class="income-source">Surveys + Microtasks</div><div class="income-sub">Prolific · MTurk · Swagbucks</div><div class="progress-mini"><div class="progress-mini-fill" style="width:70%"></div></div></div><div><div class="income-amount up">+$98.40</div><div class="income-period">MTD</div></div></div>
+      <div class="goal-summary">
+        <div><div class="goal-label">TOTAL THIS MONTH</div><div class="goal-total">$200.50</div><div class="goal-growth">▲ +41% vs last month</div></div>
+        <div style="text-align:right"><div class="goal-label">MONTHLY GOAL</div><div class="goal-target">$500</div><div class="goal-pct">40% complete</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="switchNav(this,'autoearner')"><div class="nav-icon">⚡</div><div class="nav-label">AUTO</div></div>
+  <div class="nav-item" onclick="switchNav(this,'zerodollars')"><div class="nav-icon">🆓</div><div class="nav-label">$0 STRATS</div></div>
+  <div class="nav-center-btn" onclick="activateAll()"><div class="nav-center-icon">⚡</div><div class="nav-label" style="font-size:8px;font-family:'Space Mono',monospace;color:var(--green)">EARN</div></div>
+  <div class="nav-item" onclick="switchNav(this,'markets')"><div class="nav-icon">📊</div><div class="nav-label">MARKETS</div></div>
+  <div class="nav-item" onclick="switchNav(this,'tracker')"><div class="nav-icon">📈</div><div class="nav-label">TRACK</div></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
